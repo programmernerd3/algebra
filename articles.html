@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CRVZGKE0S5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CRVZGKE0S5');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Massive Articles Hub - Large Collection</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7fa;
+    color: #333;
+    height: 100%;
+  }
+  a {
+    color: #0078d4;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    text-decoration: underline;
+  }
+
+  /* Container */
+  #app {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    padding: 20px 0;
+    border-bottom: 2px solid #0078d4;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #0078d4;
+  }
+
+  /* Navigation */
+  nav {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  nav button {
+    background-color: #e1e7f0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #0078d4;
+    transition: background-color 0.3s ease;
+  }
+  nav button.active, nav button:hover {
+    background-color: #0078d4;
+    color: white;
+  }
+
+  /* Search */
+  #search-container {
+    margin: 10px 0 20px 0;
+    text-align: center;
+  }
+  #search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #0078d4;
+    border-radius: 25px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  #search-input:focus {
+    border-color: #00599e;
+  }
+
+  /* Article List */
+  #article-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .article-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 15px 18px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    min-height: 140px;
+  }
+  .article-card:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+  }
+  .article-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    flex-grow: 1;
+  }
+  .article-summary {
+    font-size: 0.9rem;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+  .article-meta {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  /* Article Detail */
+  #article-detail {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    padding: 22px 28px;
+    margin-top: 20px;
+    display: none;
+    flex-direction: column;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  #article-detail h2 {
+    margin-top: 0;
+    color: #0078d4;
+  }
+  #article-detail .article-full-content {
+    margin-top: 15px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    white-space: pre-wrap;
+  }
+  #article-detail .back-btn {
+    margin-top: 25px;
+    align-self: flex-start;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+  #article-detail .back-btn:hover {
+    background-color: #00599e;
+  }
+
+  /* Pagination */
+  #pagination {
+    margin: 25px 0;
+    text-align: center;
+  }
+  #pagination button {
+    background-color: #0078d4;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    margin: 0 4px;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 40px;
+  }
+  #pagination button:disabled {
+    background-color: #a3c2f5;
+    cursor: default;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    #app {
+      padding: 10px;
+      max-width: 100%;
+    }
+    nav {
+      justify-content: center;
+      gap: 8px;
+    }
+    #article-list {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    #article-detail {
+      padding: 18px 20px;
+      max-height: 70vh;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Massive Articles Hub - Large Collection</h1>
+  </header>
+
+  <nav id="category-nav" aria-label="Article Categories">
+    <!-- Categories buttons inserted by JS -->
+  </nav>
+
+  <section id="search-container">
+    <input type="search" id="search-input" placeholder="Search articles..." aria-label="Search articles"/>
+  </section>
+
+  <section id="article-list" aria-live="polite" aria-relevant="additions">
+    <!-- Article cards inserted by JS -->
+  </section>
+
+  <section id="pagination" role="navigation" aria-label="Pagination controls">
+    <button id="prev-page" aria-label="Previous Page">Prev</button>
+    <button id="next-page" aria-label="Next Page">Next</button>
+  </section>
+
+  <section id="article-detail" tabindex="-1" aria-live="assertive">
+    <h2></h2>
+    <div class="article-full-content"></div>
+    <button class="back-btn" aria-label="Back to article list">Back</button>
+  </section>
+</div>
+
+<script>
+(() => {
+  const articlesPerPage = 8;
+
+  const categories = ["Science", "Technology", "Environment", "Arts", "Health", "Travel", "Finance"];
+
+  // Helper function to generate random date strings between a range
+  function randomDate(start, end) {
+    const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return date.toISOString().slice(0,10);
+  }
+
+  // Generate english paragraphs = approx 300-400 words (approximate)
+  const englishParagraphs = [
+    "The rapid advancements in this field have opened new doors of opportunity, allowing scientists and researchers to explore uncharted territories. This progress has also raised important ethical and practical questions as society adapts to these innovative technologies.",
+    "In recent years, increased global collaboration has accelerated the development and sharing of knowledge, leading to breakthroughs that were once thought unattainable. This has sparked a wave of enthusiasm and optimism across various industries and disciplines.",
+    "Despite numerous challenges, the determination to overcome obstacles has ushered in a new era of innovation. This momentum is expected to continue as resources and expertise are increasingly pooled together worldwide.",
+    "Crucial to these developments is the understanding of underlying principles and mechanisms, which have provided foundational insights. Researchers are continually building upon this foundation, refining theories and models to better explain observable phenomena.",
+    "Public awareness and engagement play a vital role in shaping the trajectory of these advancements. Educational initiatives and transparent communication are essential for fostering a well-informed community and responsible innovation.",
+    "Sustainability and environmental considerations have become central themes in ongoing research and application. Balancing technological progress with ecological responsibility is imperative for long-term success.",
+    "Emerging methodologies and tools have significantly enhanced data collection and analysis, enabling more precise and comprehensive studies. This has improved the ability to make informed decisions and predictions.",
+    "The integration of interdisciplinary approaches has fostered creativity and novel solutions. By combining insights from diverse fields, new perspectives are gained that enhance problem-solving capabilities.",
+    "Policy and regulatory frameworks are evolving to keep pace with technological innovations, aiming to support growth while safeguarding public interests. This dynamic environment demands continual assessment and adaptation.",
+    "Investment in research and development has reached unprecedented levels, reflecting confidence in the potential benefits. This financial support has catalyzed progress and attracted talents to the field."
+  ];
+
+  function generateArticleContent() {
+    const paragraphCount = 8 + Math.floor(Math.random() * 3); // 8-10 paragraphs per article
+    let content = "";
+    for (let i=0; i < paragraphCount; i++) {
+      content += englishParagraphs[i % englishParagraphs.length] + "\n\n";
+    }
+    return content.trim();
+  }
+
+  // Generate titles templates per category (5 templates each, rotating)
+  const titleTemplates = {
+    Science: [
+      "Exploring the Mysteries of {subject}",
+      "The Latest Breakthroughs in {subject} Research",
+      "{subject} and Its Impact on Humanity",
+      "Revolutionizing the Field of {subject}",
+      "Challenges and Opportunities in {subject}"
+    ],
+    Technology: [
+      "Innovations Shaping the Future of {subject}",
+      "The Rise of {subject} in 2026",
+      "How {subject} is Transforming the World",
+      "Inside the Latest Developments in {subject}",
+      "The Promise and Perils of {subject}"
+    ],
+    Environment: [
+      "Sustainability and {subject}: A Critical Connection",
+      "Addressing Climate Change Through {subject}",
+      "The Role of {subject} in Protecting Our Planet",
+      "Advances in {subject} Technology",
+      "Public Policy and {subject} Initiatives"
+    ],
+    Arts: [
+      "The Evolution of {subject} in the Digital Era",
+      "Exploring New Frontiers in {subject}",
+      "Famous Artists and Their Take on {subject}",
+      "How {subject} Influences Contemporary Culture",
+      "The Renaissance of {subject} in Modern Times"
+    ],
+    Health: [
+      "Emerging Trends in {subject} Care and Wellness",
+      "The Science Behind {subject} Treatments",
+      "How Lifestyle Affects {subject}",
+      "Innovative Approaches to {subject} Challenges",
+      "Public Health Perspectives on {subject}"
+    ],
+    Travel: [
+      "Top Destinations for {subject} Enthusiasts",
+      "Guides to Experiencing {subject} Around the World",
+      "Cultural Insights From {subject} Travels",
+      "Tips and Tricks for {subject} Adventures",
+      "The Future of {subject} Tourism"
+    ],
+    Finance: [
+      "Understanding {subject} Markets in 2026",
+      "Investment Strategies Centered on {subject}",
+      "How {subject} Is Reshaping the Financial Landscape",
+      "Economic Outlook for {subject} Industries",
+      "Technology's Influence on {subject} Finance"
+    ]
+  };
+
+  // Subjects per category to insert into templates (5 subjects each)
+  const subjects = {
+    Science: ["Genetics", "Astrophysics", "Marine Biology", "Renewable Energy", "Neuroscience"],
+    Technology: ["Artificial Intelligence", "Blockchain", "Quantum Computing", "Autonomous Vehicles", "Cybersecurity"],
+    Environment: ["Carbon Capture", "Deforestation", "Ocean Conservation", "Sustainable Agriculture", "Air Quality"],
+    Arts: ["Digital Art", "Contemporary Dance", "Street Photography", "Jazz Music", "Film Animation"],
+    Health: ["Mental Health", "Immunotherapy", "Nutrition", "Cardiovascular Health", "Telemedicine"],
+    Travel: ["Eco-tourism", "Historic Sites", "Mountain Expeditions", "Urban Exploration", "Beach Retreats"],
+    Finance: ["Cryptocurrency", "Stock Trading", "Financial Technology", "Retirement Planning", "Global Markets"]
+  };
+
+  // Generate articles array programmatically
+  const articles = [];
+
+  let articleId = 1;
+
+  function getRandomFromArray(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  categories.forEach(category => {
+    for (let i=0; i<20; i++) {
+      const template = titleTemplates[category][i % titleTemplates[category].length];
+      const subject = subjects[category][i % subjects[category].length];
+      const title = template.replace("{subject}", subject);
+      const date = randomDate(new Date(2025, 11, 1), new Date(2026, 0, 31)); // Dec 1 2025 to Jan 31 2026
+      const summary = `An insightful article about ${subject.toLowerCase()} in the context of ${category.toLowerCase()}.`;
+      const content = generateArticleContent();
+      articles.push({
+        id: articleId++,
+        title,
+        category,
+        summary,
+        content,
+        date
+      });
+    }
+  });
+
+  // Add "All" category
+  const allCategories = ["All"].concat(categories);
+
+  // State
+  let currentCategory = "All";
+  let currentPage = 1;
+  let filteredArticles = articles;
+
+  // DOM Elements
+  const navEl = document.getElementById("category-nav");
+  const articleListEl = document.getElementById("article-list");
+  const articleDetailEl = document.getElementById("article-detail");
+  const articleDetailTitle = articleDetailEl.querySelector("h2");
+  const articleDetailContent = articleDetailEl.querySelector(".article-full-content");
+  const backBtn = articleDetailEl.querySelector(".back-btn");
+  const searchInput = document.getElementById("search-input");
+  const prevPageBtn = document.getElementById("prev-page");
+  const nextPageBtn = document.getElementById("next-page");
+
+  function renderCategories() {
+    navEl.innerHTML = "";
+    allCategories.forEach(category => {
+      const btn = document.createElement("button");
+      btn.textContent = category;
+      btn.classList.toggle("active", category === currentCategory);
+      btn.setAttribute("aria-pressed", category === currentCategory);
+      btn.addEventListener("click", () => {
+        if (currentCategory !== category) {
+          currentCategory = category;
+          currentPage = 1;
+          searchInput.value = ""; // clear search
+          filterArticles();
+        }
+      });
+      navEl.appendChild(btn);
+    });
+  }
+
+  function filterArticles() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    filteredArticles = articles.filter(article => {
+      const matchesCategory = currentCategory === "All" || article.category === currentCategory;
+      const matchesSearch =
+        !searchTerm ||
+        article.title.toLowerCase().includes(searchTerm) ||
+        article.summary.toLowerCase().includes(searchTerm);
+      return matchesCategory && matchesSearch;
+    });
+    renderArticles();
+    renderPagination();
+  }
+
+  function renderArticles() {
+    articleListEl.innerHTML = "";
+    articleDetailEl.style.display = "none";
+    articleListEl.style.display = "grid";
+
+    if (filteredArticles.length === 0) {
+      articleListEl.textContent = "No articles found.";
+      return;
+    }
+
+    const startIdx = (currentPage - 1) * articlesPerPage;
+    const pageArticles = filteredArticles.slice(startIdx, startIdx + articlesPerPage);
+
+    pageArticles.forEach(article => {
+      const card = document.createElement("article");
+      card.className = "article-card";
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `Read article: ${article.title}`);
+
+      const title = document.createElement("h3");
+      title.className = "article-title";
+      title.textContent = article.title;
+
+      const summary = document.createElement("p");
+      summary.className = "article-summary";
+      summary.textContent = article.summary;
+
+      const meta = document.createElement("div");
+      meta.className = "article-meta";
+      const dateObj = new Date(article.date);
+      meta.textContent = `${article.category} | ${dateObj.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      })}`;
+
+      card.appendChild(title);
+      card.appendChild(summary);
+      card.appendChild(meta);
+
+      card.addEventListener("click", () => openArticle(article.id));
+      card.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") openArticle(article.id);
+      });
+
+      articleListEl.appendChild(card);
+    });
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+    prevPageBtn.disabled = currentPage <= 1;
+    nextPageBtn.disabled = currentPage >= totalPages || totalPages === 0;
+  }
+
+  function openArticle(id) {
+    const article = articles.find(a => a.id === id);
+    if (!article) return;
+
+    articleListEl.style.display = "none";
+    articleDetailEl.style.display = "flex";
+    articleDetailTitle.textContent = article.title;
+    articleDetailContent.textContent = article.content;
+    articleDetailEl.focus();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function goBack() {
+    articleDetailEl.style.display = "none";
+    articleListEl.style.display = "grid";
+    articleListEl.querySelector('[tabindex="0"]')?.focus();
+  }
+
+  searchInput.addEventListener("input", () => {
+    currentPage = 1;
+    filterArticles();
+  });
+  prevPageBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderArticles();
+      renderPagination();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+  nextPageBtn.addEventListener("click", () => {
+    if (currentPage < Math.ceil(filteredArticles.length / articlesPerPage)) {
+      currentPage++;
+      renderArticles();
+      renderPagination();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+  backBtn.addEventListener("click", goBack);
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && articleDetailEl.style.display === "flex") {
+      goBack();
+    }
+  });
+
+  renderCategories();
+  filterArticles();
+})();
+</script>
+</body>
+</html>
+</content>
+</create_file>
+
